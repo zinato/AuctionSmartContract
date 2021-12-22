@@ -37,8 +37,7 @@
 
 #### Mapping
 
-- tokenId와 매핑된 Auction 정보 
-- tokenId와 매핑된 Auction 결과 정보 
+- tokenId와 매핑된 Auction 정보
 - tokenId와 address(구매자)와 매핑된 최고입찰가 정보  
   - 이게 리스트로 만들어질 수 있고 효율적이면 입찰내역 전체 리스트는 만들지 않아도 됨
 - tokenId와 address(구매자)와 매핑된 입찰내역 전체 리스트
@@ -74,20 +73,20 @@
   - 지갑 잔액 체크 
   - 입찰가를 CA로 전송 
   - 최고 입찰가로 등록
+  - tokenIdToAuction 옥션 정보 업데이트
   - 입찰 내역 mapping 정보에 등록
+  - 이전 입찰자에게 이전 입찰가를 돌려줌
   - BidChanged 이벤트 호출 
-  - 
+  - BidRefund 이벤트 호출
+    - 이전 최고 입찰가 정보
 
 - 현재 입찰가를 반환 
   - tokenIdToAuction[tokenId] 매핑된 정보에서 Auction 정보를 가져와
     - Auction이 진행중인지 체크 
-    - Auction의 판매가를 반환
-    - tokenId로 매핑된 Auction 정보를 변경 
-    - tokenId로 매핑된 입찰 리스트에 입찰 내역 추가  
-    - BidChanged 이벤트 호출 
-    - BidRefund 이벤트 호출 
+    - 해당 옥션의 tokenId로 입찰가 리스트에서 
+    - 
 
-- ?
+- 입찰 내역 전체 리스트 반환
 
 #### Modifier
 
@@ -122,14 +121,26 @@
   
   //tokenId로 해당하는 Auction 매핑 
   mapping (uint256 => Auction) tokenIdToAuction;
-  
+  //tokenId와 address(구매자)와 매핑된 최고입찰가 정보 => Auction 에 Price로도 가져올 수 있음
+  mapping(uint256 => Bid))) highestBiddingPriceByTokenId;
+  //tokenId와 address(구매자)와 매핑된 입찰내역 전체 리스트
+  mapping(uint256 => mapping(uint256 => Bid))) bidsListByTokenId;
   
   function createAuction //옥션 생성
   function cancelAuction //옥션 취소 
   function getAuction // 옥션 정보 리턴 
   function getCurrentPrice //현재가 리턴 
   function closeAuction //옥션 종료 
-  function placeBid // 입찰하기 
-  function 
+  function placeBid // 입찰하기
+  function getBidList; //입찰 전체 내역 리스트 
+     
+  function _addAuction(_tokenId, auction);
+  funtcion _removeAuction(_tokenId);
+  function __isOnAuction(Auction);
+  function _getAuction(Auction);
+  function _getCurrentPrice(Auction);
+  function _closeAuction;
+  function _placeBid;  
+  funciton _getBidList;
    
 ```
