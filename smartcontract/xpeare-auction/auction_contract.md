@@ -1,10 +1,11 @@
-# Auction Sudo Code
+# Auction Smartcontract Code 
 
-#### Sudo
+#### Action
 1. 어드민에서 옥션 실행 -> 컨트랙트에서 옥션 생성
 2. 어드민에서 옥션 취소 ->  mapping된 옥션 정보 삭제
-3. 어드민에서 옥션 종료 -> 컨트랙트에서 옥션 종료, mapping된 옥션 정보 삭제 및 옥션 결과 리턴
-4. 최고가 입찰 참여 -> 사용자 지갑에서 입찰가 만큼 가져옴 mapping된 bid 정보에 등록
+3. 어드민에서 종료된 옥션 리스트 보기
+   1. 어드민에서 옥션 종료 -> 컨트랙트에서 옥션 종료, mapping된 옥션 정보 삭제 및 옥션 결과 리턴
+
 
 #### Struct 
 
@@ -13,12 +14,13 @@
     - 옥션 시작 시간 
     - 옥션 종료 시간
   - 판매가
+  - 판매자
+  - NFT 토큰 Id
 
 [comment]: <> (    - 옥션 시작가)
 
 [comment]: <> (    - 옥션 종료가)
-  - 판매자 
-  - NFT 토큰 Id
+ 
 
 - **Bid**
   - 입찰자 주소 
@@ -27,11 +29,11 @@
   - 참여하는 옥션의 tokenId
     - 옥션의 mapping 정보가 tokenId 로 mapping 되어야 함
 
-#### Event
+#### Event (Log)
 
 - 옥션 생성
 - 옥션 취소 
-- 옥션 성공 (종료)
+- 옥션 종료
 - 최고입찰가 변경 
 - 입찰가 반환 
 
@@ -69,7 +71,8 @@
   - AuctionSuccess Event 호출 
 
 - 입찰하기 
-  - 옥션 기간 체크 
+  - 옥션 기간 체크
+  - 해당 옥션에 입찰한 내역이 있는지 체크
   - 지갑 잔액 체크 
   - 입찰가를 CA로 전송 
   - 최고 입찰가로 등록
@@ -99,12 +102,12 @@
 
 ```
   struct Auction {
-    startingPrice, //옥션 시작가
-    endingPrice, //옥션 종료가
-    startTime, // 옥션 시작 시간
-    endTime, // 옥션 종료 시간
-    seller, //현재 NFT 소유자
-    tokenId, //nft TokenId
+    startingPrice; //옥션 시작가
+    endingPrice; //옥션 종료가
+    startTime; // 옥션 시작 시간
+    endTime; // 옥션 종료 시간
+    seller; //현재 NFT 소유자
+    tokenId; //nft TokenId
   }
 
   struct Bid {
