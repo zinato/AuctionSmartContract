@@ -1,4 +1,4 @@
-# Auction Smartcontract Code 
+# Auction Smartcontract Code (완성본이 아님)
 
 #### Action
 1. 어드민에서 옥션 실행 -> 컨트랙트에서 옥션 생성
