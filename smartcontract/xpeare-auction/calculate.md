@@ -8,7 +8,7 @@
 - 함수를 실행하는 실행자에 대한 조건이 필요 (owner, 또는 어드민 계정)
 
 #### Process
-![Calculate Process](./img/contract_calculate_process.pdf)
+![Calculate Process](./img/calculate_process.jpg)
 
 #### Action 
 
