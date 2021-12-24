@@ -8,6 +8,7 @@
 - 함수를 실행하는 실행자에 대한 조건이 필요 (owner, 또는 어드민 계정)
 
 #### Process
+
 ![Calculate Process](./img/calculate_process.jpg)
 
 #### Action 
@@ -31,7 +32,7 @@
   - 거래 수수료(xpeare가 받는 금액)
   - 정산 받을 사람 리스트 (정산받을 지갑주소와 정산 받을 토큰 수량 매핑, xpeare wallet 지갑 주소 포함)
 
-- **Creator Calculate**
+- **NFT Calculate**
   - 낙찰자 (NFT 받을 사람)
   - NFT tokenId
   - 최종 낙찰 금액 (정산 받을 금액들의 합산 체크를 위해)
@@ -46,7 +47,40 @@
 - creator에게 정산 금액 전송
 - 최종 낙찰자에게 NFT 전송 
 
-#### Mapping
+#### Modifier 
+
+- whenPaused
+  - 컨트랙트가 정지되었는지 체크
+- whenNotPaused
+  - 컨트랙트가 정지가 안되었는지 체크
+- onlyOwner
+  - 컨트랙트 소유자인지 체크 
+
+```
+ struct CreatorCalculate {
+  endingPrice; //최종 낙찰 금액 
+  tradeFee; //거래 수수료 
+  creatorList; //정산 리스트(지갑주소 : 금액)
+ }
+ 
+ struct NFTCalculate {
+  nftTokenId; // 옥션으로 낙찰된 NFT tokenId
+  auctionWonAddress; //최종 낙찰자 주소 
+ }
+ 
+ event CreatorCalculateCreated(CreatorCalculate);
+ event NFTCalculateCreated(NFTCalculate);
+ event CreatorCalcuate(CreatorCalculate); // 정산 금액 전송  
+ event NFTCalculate(NFTCalculate); // NFT 낙찰자에게 전송
+
+ function createCreatorCalculate(endingPrice, tradeFee, creatorList);
+ function createNFTCalculate(nftTokenId, auctionWonAddress);
+ function widthdrawCreator(CreatorCalcuate);
+ function widthdrawNFT(NFTCalculate);
+ 
+ function _widthdrawCreator(_creator, _amount);
+ funnction _widthdrawNFT(_receiver, _nftTokenId);
+```
 
 
 
