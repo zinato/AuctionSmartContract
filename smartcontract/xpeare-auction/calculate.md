@@ -4,8 +4,8 @@
 
 - 정산 받을 사람들의 수수료를 나눴을 때 정확히 떨어지지 않는 에러가 발생할 수 있음
   - 소수점 제한이 화면에 표시되는 것과 kXDT의 소수점이 다르기 때문 
-  - 제한조건을 만들어줘야 함
-  - 어드민 프로그램에서 계산을 해서 지갑주소 : 보낼 토큰 양으로 정해져서 보내주는 것이 좋음
+  - ~~제한조건을 만들어줘야 함~~
+  - ~~어드민 프로그램에서 계산을 해서 지갑주소 : 보낼 토큰 양으로 정해져서 보내주는 것이 좋음~~
 - 함수를 실행하는 실행자에 대한 조건이 필요 (owner, 또는 어드민 계정)
 
 #### Process
@@ -69,19 +69,18 @@
   auctionWonAddress; //최종 낙찰자 주소 
  }
  
- event CreatorCalculateCreated(CreatorCalculate);
- event NFTCalculateCreated(NFTCalculate);
+ event CreatorCalculateCreated(CreatorCalculate); //Creator 정산 생성 
+ event NFTCalculateCreated(NFTCalculate); // NFT 정산 생성
  event CreatorCalcuate(CreatorCalculate); // 정산 금액 전송  
  event NFTCalculate(NFTCalculate); // NFT 낙찰자에게 전송
 
- function createCreatorCalculate(endingPrice, tradeFee, creatorList);
- function createNFTCalculate(nftTokenId, auctionWonAddress);
- function widthdrawCreator(CreatorCalcuate);
- function widthdrawNFT(NFTCalculate);
+ function createCreatorCalculate(endingPrice, tradeFee, creatorList); //Creator 정산 생성 
+ function createNFTCalculate(nftTokenId, auctionWonAddress); // NFT 정산 생성
+ function widthdrawCreator(CreatorCalcuate); // 정산 금액 전송
+ function widthdrawNFT(NFTCalculate); // NFT 낙찰자에게 전송
  
  function _widthdrawCreator(_creator, _amount);
  function _widthdrawNFT(_receiver, _nftTokenId);
 ```
-
 
 
